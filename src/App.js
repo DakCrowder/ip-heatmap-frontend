@@ -1,25 +1,20 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import LeafletMap from './LeafletMap'
+
+const hostname = window && window.location && window.location.hostname;
+let api_base_url = ''
+if (hostname.includes('localhost')) {
+  api_base_url = new URL('http://localhost:3000/api/ip_locations')
+} else {
+  api_base_url = new URL('http://ipv6mappingapi-env.bbqigzi5ur.us-east-1.elasticbeanstalk.com/api/ip_locations')
+}
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <LeafletMap apiUrl={api_base_url} />
       </div>
     );
   }
